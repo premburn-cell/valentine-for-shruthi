@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Shruthi ❤️</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
+
+  .card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    max-width: 350px;
+    width: 90%;
+    animation: pop 1s ease;
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  h1 {
+    color: #e91e63;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    color: #ff4081;
+    margin-bottom: 25px;
+  }
+
+  p {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+
+  button {
+    padding: 14px 32px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 10px;
+  }
+
+  #yesBtn {
+    background: #e91e63;
+    color: white;
+    box-shadow: 0 6px 15px rgba(233,30,99,0.4);
+  }
+
+  #noBtn {
+    background: #ddd;
+    position: absolute;
+  }
+
+  .rose, .heart {
+    position: fixed;
+    top: -50px;
+    font-size: 28px;
+    animation: fall linear forwards;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .popup-content {
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    text-align: center;
+    animation: pop 0.8s ease;
+  }
+
+  .popup-content h2 {
+    color: #e91e63;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>💖 Shruthi 💖</h1>
+  <h2>Will you be my Valentine?</h2>
+  <p>
+    From every heartbeat to every smile,<br>
+    you make my world more beautiful ❤️
+  </p>
+  <button id="yesBtn">Yes 🌹</button>
+  <button id="noBtn">No 🙈</button>
+</div>
+
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <h2>💍 Forever Starts Now 💍</h2>
+    <p>You just made me the happiest person alive ❤️</p>
+  </div>
+</div>
+
+<!-- Minnalae BGM -->
+<audio id="bgm" loop>
+  <source src="minnalae_bgm.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const popup = document.getElementById("popup");
+  const bgm = document.getElementById("bgm");
+
+  // Move NO button
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 60);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  });
+
+  // YES click
+  yesBtn.addEventListener("click", () => {
+    bgm.play();
+    popup.style.display = "flex";
+
+    for (let i = 0; i < 80; i++) {
+      setTimeout(createRose, i * 80);
+      setTimeout(createHeart, i * 100);
+    }
+  });
+
+  function createRose() {
+    const rose = document.createElement("div");
+    rose.className = "rose";
+    rose.innerHTML = "🌹";
+    rose.style.left = Math.random() * 100 + "vw";
+    rose.style.animationDuration = (2 + Math.random() * 3) + "s";
+    document.body.appendChild(rose);
+    setTimeout(() => rose.remove(), 5000);
+  }
+
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }
+</script>
+
+</body>
+</html>
