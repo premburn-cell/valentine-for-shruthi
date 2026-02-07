@@ -126,7 +126,7 @@
 </div>
 
 <!-- Minnalae BGM -->
-<audio id="bgm" loop>
+<audio id="bgm" preload="auto">
   <source src="minnalae_bgm.mp3" type="audio/mpeg">
 </audio>
 
@@ -146,14 +146,22 @@
 
   // YES click
   yesBtn.addEventListener("click", () => {
-    bgm.play();
-    popup.style.display = "flex";
+  bgm.currentTime = 0;
+  bgm.muted = false;
 
-    for (let i = 0; i < 80; i++) {
-      setTimeout(createRose, i * 80);
-      setTimeout(createHeart, i * 100);
-    }
+  bgm.play().then(() => {
+    console.log("🎵 Minnalae BGM playing");
+  }).catch(err => {
+    console.log("Audio blocked, retrying", err);
   });
+
+  popup.style.display = "flex";
+
+  for (let i = 0; i < 80; i++) {
+    setTimeout(createRose, i * 80);
+    setTimeout(createHeart, i * 100);
+  }
+});
 
   function createRose() {
     const rose = document.createElement("div");
@@ -178,6 +186,7 @@
 
 </body>
 </html>
+
 
 
 
